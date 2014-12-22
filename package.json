@@ -1,0 +1,25 @@
+{
+  "name": "oknow",
+  "version": "0.0.1",
+  "description": "An extremely simple promise library for deferred callbacks",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matterial/oknow"
+  },
+  "keywords": [
+    "promise",
+    "deferred",
+    "simple",
+    "matterial"
+  ],
+  "author": "Riten Vagadiya",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/matterial/oknow/issues"
+  },
+  "homepage": "https://github.com/matterial/oknow"
+}
