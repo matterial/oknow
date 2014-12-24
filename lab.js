@@ -55,4 +55,5 @@ function doLog() {
 	console.log("Callback executed");
 	console.log(ran);
 }
+//executing promises via chaining
 p.execute(nonPromise).then(nonPromise2).then(nonPromise3).then(doLog);
