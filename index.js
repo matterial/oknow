@@ -12,16 +12,20 @@ Function.prototype.after = function(fn) {
 }
 Promise.prototype = {
 	fnStack: [],
-	execute: function(fn) {
+	execute: function(fn, syntheticArgs) {
 		var $this = this;
+		syntheticArgs = syntheticArgs || [];
 		process.nextTick(function() {
 			try {
 				if (fn) {
-					fn(function() {
-						$this.next(arguments);
+					syntheticArgs.unshift(function() {
+						$this.next.apply($this, arguments);
 					});
+					// console.log(syntheticArgs);
+					fn.apply(this, syntheticArgs);
 				} else {
-					$this.next(arguments);
+					syntheticArgs = syntheticArgs || [];
+					$this.next.apply(this, syntheticArgs);
 				}
 			} catch(e) {
 				console.log(e);
@@ -33,54 +37,14 @@ Promise.prototype = {
 		return 100;
 	},
 	after: function(cb) {
-		this.fnStack.push({fn: cb, args: arguments});
+		this.fnStack.push({fn: cb});
 		return this;
 	},
 	next: function() {
 		var nextFn = this.fnStack.shift();
-		if (nextFn)
-			return this.execute(nextFn.fn);
+		if (nextFn) {
+			var args = Array.prototype.slice.call(arguments);
+			return this.execute(nextFn.fn, args);
+		}
 	}
 }
-var ran = [];
-function nonPromise(callback) {
-	console.log("first");
-	setTimeout(function() {
-		ran.push('nonPromise');
-		callback();
-	}, 200);
-}
-function nonPromise2(callback) {
-	console.log("second");
-	setTimeout(function() {
-		ran.push('nonPromise2');
-		callback();
-	}, 100);
-}
-function nonPromise3(callback) {
-	console.log("third");
-	setTimeout(function() {
-		ran.push('nonPromise3');
-		callback();
-	}, 100);
-}
-var p = pCreate();
-
-function doLog() {
-	console.log("finished");
-	// console.log(ran);
-}
-
-//executing promises via chaining
-// p.execute(nonPromise).after(nonPromise2).after(nonPromise3).after(doLog);
-
-
-
-nonPromise.after(nonPromise2).after(nonPromise3).after(doLog);
-
-
-function test() {
-	console.log("A");
-}
-// test.after(doLog).after(nonPromise3);
-
