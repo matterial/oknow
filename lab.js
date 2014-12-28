@@ -11,6 +11,7 @@ function getPackage(done) {
 	});
 }
 function getIgnore(done, result) {
+	console.log(result);
 	fs.readFile('./sample2.txt', function read(err, data) {
 	    if (err) {
 	        throw err;
@@ -20,6 +21,13 @@ function getIgnore(done, result) {
 }
 function allDone(done, result) {
 	console.log(result);
+	console.log("Done.");
 }
 
-getPackage.after(getIgnore).after(allDone);
+(function(done) {
+	console.log("Starting...");
+	done();
+})
+.after(getPackage)
+.after(getIgnore)
+.after(allDone);
