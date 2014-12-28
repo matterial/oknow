@@ -11,7 +11,6 @@ function getPackage(done) {
 	});
 }
 function getIgnore(done, result) {
-	console.log(result);
 	fs.readFile('./sample2.txt', function read(err, data) {
 	    if (err) {
 	        throw err;
