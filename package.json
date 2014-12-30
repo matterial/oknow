@@ -1,7 +1,7 @@
 {
   "name": "oknow",
-  "version": "0.0.1",
-  "description": "An extremely simple promise library for deferred callbacks",
+  "version": "0.0.2",
+  "description": "A simple promises module for deferred callbacks in JavaScript.",
   "main": "index.js",
   "scripts": {
     "test": "npm test"
@@ -13,7 +13,9 @@
   "keywords": [
     "promise",
     "deferred",
+    "callback",
     "simple",
+    "promises",
     "matterial"
   ],
   "author": "Riten Vagadiya",
