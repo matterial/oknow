@@ -103,4 +103,4 @@ The module supports passing data from one call to another, for dependable functi
 
 ## Contributing
 
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code.
+**OkNow** is created by <a href="https://twitter.com/ritenv" target="blank">@ritenv</a>. Contributions are open and welcome. For any issues, please raise it in the issues section and feel free to send pull requests to fix them.
