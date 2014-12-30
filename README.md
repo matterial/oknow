@@ -1,7 +1,7 @@
 Ok, now...
 =====
 
-A simple promise module for deferred callbacks in JavaScript.
+A simple promise module for deferred callbacks for JavaScript.
 
 ## The idea
 
