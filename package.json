@@ -1,6 +1,6 @@
 {
   "name": "oknow",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "A simple promises module for deferred callbacks in JavaScript.",
   "main": "index.js",
   "scripts": {
