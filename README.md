@@ -9,13 +9,11 @@ The idea behind this simple module was to allow chaining of functions much like 
 
 ### Install
 
-<pre>
 	npm install oknow
-</pre>
 
 ### Assume
 Assume we have 3 functions like below:
-<pre>
+
 	var readFromFile = function(ok) {
 		//an async function that reads data from a file
 		ok();
@@ -28,34 +26,30 @@ Assume we have 3 functions like below:
 		//some code here to delete the file we used previously
 		ok();
 	}
-</pre>
 
 These are all individual functions that run async code inside them. The idea is to explicitly say `ok` when the function finishes, so the next function in the queue will execute if there was no error. Check the below section.
 
 ### Basic Chaining
-<pre>
+
 	var oknow = require('oknow');
 	oknow(readFromFile)
 	.after(updateUser)
 	.after(deleteFile);
-</pre>
 
 The `readFromFile` function would read a file's contents asynchronously, and when it finishes reading, it has to say `ok`. This is when the next function in the queue is called (`updateUser` and then `deleteFile`, one after the other).
 
 ### Use Directly
-<pre>
+
 	readFromFile
 	.after(updateUser)
 	.after(deleteFile);
 	//notice that we don't need the 'oknow' reference
 	//functions have an 'after' function by default
-</pre>
 
 When you require the module with `require('oknow');`, it overrides the `Function` prototype with an additional member called `after` that accepts another function. So you can directly call `after` on any function to execute it and chain it with the next.
 
 ### Simple Error Handling
 
-<pre>
 	readFromFile
 	.after(function(ok) {
 		//code to update user, error occurred!
@@ -75,7 +69,6 @@ When you require the module with `require('oknow');`, it overrides the `Function
 	});
 	//notice that the delete file function is not called due to error
 	//control moves to the catch block
-</pre>
 
 When calling `ok` from within any async function, pass an error object to it as parameter - this will break the execution chain and jump directly to the available `catch` block.
 
@@ -84,7 +77,7 @@ When calling `ok` from within any async function, pass an error object to it as 
 The module supports passing data from one call to another, for dependable functions that need the result from previously called function. This is achieved by passing the parameters directly to the `ok` call, and reading them in the next function as arguments. (Remember, the first argument is always `ok`!).
 
 **Example**
-<pre>
+
 	readFromFile
     .after(function(ok) {
         var theFileContents = 'User = John, Age = 25'; //read file contents into a variable
@@ -98,7 +91,6 @@ The module supports passing data from one call to another, for dependable functi
     .after(function() {
 		console.log("Done");
     });
-</pre>
 
 
 ## Contributing
