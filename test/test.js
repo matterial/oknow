@@ -1,4 +1,4 @@
-var oknow = require('../index');
+var oknow = require('../oknow');
 var assert = require('assert');
 var should = require('should');
 describe('Prototype', function() {

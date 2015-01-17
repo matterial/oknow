@@ -1,10 +1,10 @@
 {
   "name": "oknow",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A simple promises module for deferred callbacks in JavaScript.",
-  "main": "index.js",
+  "main": "oknow.js",
   "scripts": {
-    "test": "npm test"
+    "test": "./node_modules/mocha/bin/mocha"
   },
   "repository": {
     "type": "git",

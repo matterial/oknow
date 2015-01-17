@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>OK, Now... Example</title>
+	<script type="text/javascript" src="./oknow.js"></script>
+</head>
+<body>
+	<p id="content">Initializing...</p>
+	<script type="text/javascript">
+		function write(ok) {
+			document.getElementById("content").innerHTML += "<br>Writing something after 2000 ms from now";
+			setTimeout(function() {
+				document.getElementById("content").innerHTML += "<br>This is a sample writing.";
+				ok();
+			}, 2000);
+		}
+		write
+		.after(function(ok) {
+			setTimeout(function() {
+				document.getElementById("content").innerHTML += "<br>This is called after writing finishes.";
+				ok();
+			}, 1000);
+		})
+		.after(function(ok) {
+			setTimeout(function() {
+				document.getElementById("content").innerHTML += "<br>This will pass a value '10' to next call.";
+				ok(10);
+			}, 1000);
+			
+		})
+		.after(function(ok, val) {
+			document.getElementById("content").innerHTML += "<br>Value received from previous call was: " + val;
+		});
+	</script>
+</body>
+</html>

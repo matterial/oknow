@@ -50,7 +50,7 @@ Promise.prototype = {
 		/**
 		 * Ensure to have it in the next event loop for better async
 		 */
-		process.nextTick(function() {
+		var processResponder = function() {
 			try {
 				if (fn) {
 					/**
@@ -81,7 +81,12 @@ Promise.prototype = {
 					this.onCatch(e);
 				}
 			}
-		});
+		};
+		if (typeof process === "undefined") {
+			processResponder();
+		} else {
+			process.nextTick(processResponder);
+		}
 		/**
 		 * Return self for chaining
 		 */
@@ -132,4 +137,8 @@ Promise.prototype = {
  * Provide the instantiator interface
  * @type {Function}
  */
-module.exports = pCreate;
+if (typeof window !== "undefined") {
+	window.oknow = pCreate;
+} else {
+	module.exports = pCreate;
+}
