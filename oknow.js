@@ -79,6 +79,8 @@ Promise.prototype = {
 				 */
 				if (this.onCatch) {
 					this.onCatch(e);
+				} else {
+					throw e;
 				}
 			}
 		};
@@ -110,7 +112,7 @@ Promise.prototype = {
 		/**
 		 * If err is an Error object, break the chain and call catch
 		 */
-		if (err && err.constructor.name === "Error" && this.onCatch) {
+		if (err && (err.constructor.name === "Error" || err.constructor.name === "TypeError") && this.onCatch) {
 			this.onCatch(err);
 			return;
 		}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>OK, Now... Example</title>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="./oknow.js"></script>
+</head>
+<body>
+	<p id="content">Ensure to run this page over http...</p>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			(function(ok) {
+				$.get('./package.json', ok);
+			})
+			.after(function(ok, response) {
+				document.getElementById("content").innerHTML = "Name from package.json is: " + response.name;
+			})
+		});
+		
+	</script>
+</body>
+</html>
